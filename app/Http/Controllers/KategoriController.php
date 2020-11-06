@@ -6,6 +6,7 @@ use Illuminate\Support\Str;
 use App\Models\Kategori;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Validator;
 
 class KategoriController extends Controller
 {
@@ -19,9 +20,14 @@ class KategoriController extends Controller
         $msg = [
             'required' => 'Inputan :attribute wajib diisi',
         ];
-        $request->validate([
+        $validator = Validator::make($request->all(),[
             'nama' => ['required','min:4','max:15','unique:kategoris'],
         ], $msg);
+        if ($validator->fails()) {
+            return redirect('kategori')
+            ->withErrors($validator)->with('create', true)
+            ->withInput(); 
+		}
         Kategori::create([
             'nama' => Str::slug($request->nama,'-'),
         ]); 
@@ -30,12 +36,17 @@ class KategoriController extends Controller
     public function update(Request $request,Kategori $kategori)
     {
         $msg = [
-            'numeric' => 'Inputan :attribute harus berupa angka',
             'required' => 'Inputan :attribute wajib diisi',
         ];
-        $request->validate([
+        $validator = Validator::make($request->all(),[
             'nama' => ['required','min:5','max:15',Rule::unique('kategoris')->ignore($kategori->id)],
         ], $msg);
+
+        if ($validator->fails()) {
+            return redirect('kategori')
+            ->withErrors($validator)->with('update', true)
+            ->withInput(); 
+		}
         $kategori->update([
             'nama' => Str::slug($request->nama,'-')
         ]); 

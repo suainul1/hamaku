@@ -1,4 +1,7 @@
 @extends('layouts.master',['title' => 'MyProfile | '.$user->name])
+@section('head')
+<link rel="stylesheet" href="{{asset('assets/examples/css/uikit/modals.css')}}">
+@endsection
 @section('content')
 <div class="page">
     
@@ -54,6 +57,7 @@
             <span class="text-danger">{{$message}}</span>
             @enderror
                   </div>
+                  <span class="text-danger">Jika Tidak ingin mengganti password harap tidak diisi</span>
                   <div class="form-group form-material @error('old_password') has-danger @enderror" data-plugin="formMaterial">
                     <label class="form-control-label" for="inputPassword">Password lama</label>
                     <input type="password" class="form-control" id="inputPassword" name="old_password" placeholder="Password">
@@ -82,8 +86,8 @@
                   </div>
                   <div class="form-group form-material floating @error('jenis_kelamin') has-danger @enderror" data-plugin="formMaterial">
                     <select name="jenis_kelamin" class="form-control">
-                      <option value="pria" {{$user->jenis_kelamin == 'pria' ? 'checked' : null}}>Laki-Laki</option>
-                      <option value="wanita" {{$user->jenis_kelamin == 'wanita' ? 'checked' : null}}>Perempuan</option>
+                      <option value="pria" {{$user->jenis_kelamin == 'pria' ? 'selected' : null}}>Laki-Laki</option>
+                      <option value="wanita" {{$user->jenis_kelamin == 'wanita' ? 'selected' : null}}>Perempuan</option>
                     </select>
                     <label class="floating-label">Jenis Kelamin</label>
                     @error('jenis_kelamin')

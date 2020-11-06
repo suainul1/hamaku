@@ -16,7 +16,6 @@ class CreateAhliTanisTable extends Migration
         Schema::create('ahli_tanis', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->enum('status',['aktif','nonaktif']);
             $table->string('profesi');
             $table->timestamps();
         });

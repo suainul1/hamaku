@@ -52,3 +52,4 @@
      <script src="{{asset('global/js/Plugin/material.js')}}"></script> 
      <script src="{{asset('assets/examples/js/dashboard/v1.js')}}"></script>
      @yield('footer')
+    

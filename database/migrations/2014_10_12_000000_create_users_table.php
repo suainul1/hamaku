@@ -23,6 +23,7 @@ class CreateUsersTable extends Migration
             $table->text('alamat');
             $table->enum('jenis_kelamin',['pria','wanita']);
             $table->string('image')->nullable();
+            $table->enum('status',['aktif','nonaktif'])->default('aktif');
             $table->rememberToken();
             $table->timestamps();
         });

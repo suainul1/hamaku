@@ -7,7 +7,7 @@
       <div class="page-content container-fluid">
         <div class="row">
             <div class="col-md-12">
-                <button data-target="#exampleNiftyFall" data-toggle="modal" type="button" class="btn btn-primary waves-effect waves-classic float-right" id="myButton"><i class="icon md-plus" aria-hidden="true"></i>Add Kategori</button>
+                <button data-target="#exampleNiftyFall" data-toggle="modal" type="button" class="btn btn-primary waves-effect waves-classic float-right" id="myButtonAdd"><i class="icon md-plus" aria-hidden="true"></i>Add Kategori</button>
           <!-- Modal -->
           <div class="modal fade modal-fall" id="exampleNiftyFall" aria-hidden="true" aria-labelledby="exampleModalTitle"
             role="dialog" tabindex="-1">
@@ -46,7 +46,7 @@
                 <ul class="list-group list-group-bordered">
                 @foreach ($kategoris as $i=>$k)
                  <!-- Modal -->
-                <div class="modal fade modal-fall" id="exampleNiftyFall{{$i}}" aria-hidden="true" aria-labelledby="exampleModalTitle"
+          <div class="modal fade modal-fall" id="exampleNiftyFall{{$i}}" aria-hidden="true" aria-labelledby="exampleModalTitle"
           role="dialog" tabindex="-1">
           <div class="modal-dialog modal-simple">
             <div class="modal-content">
@@ -54,7 +54,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">×</span>
                 </button>
-                <h4 class="modal-title">Kategori</h4>
+                <h4 class="modal-title">Edit Kategori</h4>
               </div>
               <div class="modal-body">
               <form action="{{route('kategori.update',$k->id)}}" method="POST">
@@ -77,7 +77,7 @@
           </div>
         </div>
         <!-- End Modal -->
-      <li class="list-group-item {{$i%2 == 0 ? 'active' : null}}">{{$k->nama}} <form id="kategori" action="{{route('kategori.delete',$k->id)}}" method="POST"> @csrf @method('delete') <a onclick="confirm('apakah anda yakin ingin Mengahpus?')" id="delete"><span style="cursor: pointer" class="badge badge-round badge-danger float-right">Hapus</span></a></form><span data-target="#exampleNiftyFall{{$i}}" data-toggle="modal" class="badge badge-round badge-warning float-right">Edit</span></li>
+      <li class="list-group-item {{$i%2 == 0 ? 'active' : null}}">{{$k->nama}} <form id="kategori" action="{{route('kategori.delete',$k->id)}}" method="POST"> @csrf @method('delete') <a onclick="confirm('apakah anda yakin ingin Mengahpus?')" id="delete"><span style="cursor: pointer" class="badge badge-round badge-danger float-right">Hapus</span></a></form><span data-target="#exampleNiftyFall{{$i}}" data-toggle="modal" id="myButtonEdit" class="badge badge-round badge-warning float-right">Edit</span></li>
                 @endforeach
                 </ul>
             </div>
@@ -87,12 +87,21 @@
 @endsection
 @section('footer')
     <script>
-      @if($errors->any())
+      var add = "{{session()->get('create')}}";
+      var update =  "{{session()->get('update')}}" ;
+      if(add == "1"){
       window.onload = function(){
-      var button = document.getElementById('myButton');
+      var button = document.getElementById('myButtonAdd');
     button.click();
       }
-      @endif
+      }
+
+      if(update == "1"){
+      window.onload = function(){
+      var button = document.getElementById('myButtonEdit');
+    button.click();
+      }
+      }
       $("a#delete").click(function()
     {
     $("#kategori").submit();
