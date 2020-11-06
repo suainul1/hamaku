@@ -4,18 +4,24 @@
         <div>
           <ul class="site-menu" data-plugin="menu">
             <li class="site-menu-category">General</li>
+            @if (auth()->user()->role == 'admin')
+                
             <li class="site-menu-item active">
-            <a class="animsition-link" href="{{route('user.all')}}">
-                      <i class="site-menu-icon md-view-dashboard" aria-hidden="true"></i>
-                      <span class="site-menu-title">Managemen User</span>
-                  </a>
+              <a class="animsition-link" href="{{route('user.all')}}">
+                <i class="site-menu-icon md-view-dashboard" aria-hidden="true"></i>
+                <span class="site-menu-title">Managemen User</span>
+              </a>
             </li>
+            @endif
+            @if (auth()->user()->role == 'petani')
+                
             <li class="site-menu-item active">
               <a class="animsition-link" href="{{route('artikel.index')}}">
                         <i class="site-menu-icon md-view-dashboard" aria-hidden="true"></i>
                         <span class="site-menu-title">Artikel</span>
                     </a>
               </li>
+            @endif
               @if (auth()->user()->role != 'petani')
                   
               <li class="site-menu-item has-sub">
