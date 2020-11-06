@@ -80,7 +80,7 @@
               <select name="role" class="form-control">
                 <option value="admin" {{old('role') == 'admin' ? 'checked' : null}}>Admin</option>
                 <option value="ahli_tani" {{old('role') == 'ahli_tani' ? 'checked' : null}}>Ahli Tani</option>
-                <option value="petani" {{old('role') == 'petani' ? 'checked' : null}}>Ahli Tani</option>
+                <option value="petani" {{old('role') == 'petani' ? 'checked' : null}}>Petani</option>
               
               </select>
               <label class="floating-label">Hak Akses</label>
