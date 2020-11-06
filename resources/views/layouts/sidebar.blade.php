@@ -10,26 +10,35 @@
                       <span class="site-menu-title">Managemen User</span>
                   </a>
             </li>
-            <li class="site-menu-item has-sub">
-              <a href="javascript:void(0)">
-                      <i class="site-menu-icon md-google-pages" aria-hidden="true"></i>
-                      <span class="site-menu-title">Kelola Artikel</span>
-                              <span class="site-menu-arrow"></span>
-                  </a>
-              <ul class="site-menu-sub">
-                <li class="site-menu-item">
-                <a class="animsition-link" href="{{route('artikel.index')}}">
-                    <span class="site-menu-title">Artikel</span>
-                  </a>
-                </li>
-                <li class="site-menu-item">
-                <a class="animsition-link" href="{{route('kategori.index')}}">
-                    <span class="site-menu-title">Kategori</span>
-                  </a>
-                </li>
-              
-              </ul>
-            </li>
+            <li class="site-menu-item active">
+              <a class="animsition-link" href="{{route('artikel.index')}}">
+                        <i class="site-menu-icon md-view-dashboard" aria-hidden="true"></i>
+                        <span class="site-menu-title">Artikel</span>
+                    </a>
+              </li>
+              @if (auth()->user()->role != 'petani')
+                  
+              <li class="site-menu-item has-sub">
+                <a href="javascript:void(0)">
+                  <i class="site-menu-icon md-google-pages" aria-hidden="true"></i>
+                  <span class="site-menu-title">Kelola Artikel</span>
+                  <span class="site-menu-arrow"></span>
+                </a>
+                <ul class="site-menu-sub">
+                  <li class="site-menu-item">
+                    <a class="animsition-link" href="{{route('artikel.index')}}">
+                      <span class="site-menu-title">Artikel</span>
+                    </a>
+                  </li>
+                  <li class="site-menu-item">
+                    <a class="animsition-link" href="{{route('kategori.index')}}">
+                      <span class="site-menu-title">Kategori</span>
+                    </a>
+                  </li>
+                  
+                </ul>
+              </li>
+              @endif
             
           </ul>
           <div class="site-menubar-section">

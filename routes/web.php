@@ -34,8 +34,10 @@ Route::prefix('kategori')->name('kategori.')->group(function () {
 Route::prefix('user')->name('user.')->group(function () {
     Route::get('/',[UserController::class,'index'])->name('index');
     Route::get('/all',[UserController::class,'all'])->name('all');
+    Route::put('/{user}/all',[UserController::class,'allUpdate'])->name('all.update');   
+    Route::post('/add',[UserController::class,'add'])->name('add');
     Route::put('/{user}',[UserController::class,'update'])->name('update');
-    
+    Route::put('/{user}/blokir',[UserController::class,'blokir'])->name('blokir'); 
 });
 Auth::routes(['verify' => true]);
 
@@ -43,7 +45,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::view('/', 'home.index')->name('home');
 });
 
-Route::group(['middleware' => ['auth', 'CheckRole:petani','verified']], function () {
+Route::group(['middleware' => ['auth', 'CheckRole:petani','verified','CheckStatus:aktif']], function () {
     
 });
 
@@ -53,6 +55,6 @@ Route::group(['middleware' => ['auth', 'CheckRole:admin']], function () {
 });
 
 
-Route::group(['middleware' => ['auth', 'CheckRole:ahliTani']], function () {
+Route::group(['middleware' => ['auth', 'CheckRole:ahliTani','CheckStatus:aktif']], function () {
     
 });

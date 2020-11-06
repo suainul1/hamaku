@@ -51,7 +51,7 @@ class ArtikelController extends Controller
             'isi' => $request->isi
         ]);
         $al->kategoris()->sync($request->kategori);
-        return redirect()->back();
+        return redirect('artikel');
     }
     public function edit(Artikel $artikel)
     {

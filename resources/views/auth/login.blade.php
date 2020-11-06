@@ -21,6 +21,9 @@
           <h2 class="brand-text">Dr. Hama</h2>
         </div>
         <p>Silahkan Login Untuk Menikmati Semua Layanan Kami:)</p>
+        @error('password')
+        <span class="text-danger">{{$message}}</span>
+          @enderror
         <form method="POST" action="{{ route('login') }}">
             @csrf
           <div class="form-group form-material floating" data-plugin="formMaterial">

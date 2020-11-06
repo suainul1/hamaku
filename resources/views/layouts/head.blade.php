@@ -8,6 +8,7 @@
     <meta name="author" content="">
     
     <title>{{$title ?? 'Login/Register'}}</title>
+
     
     <link rel="apple-touch-icon" href="{{asset('assets/images/apple-touch-icon.png')}}">
     <link rel="shortcut icon" href="{{asset('assets/images/favicon.png')}}">
@@ -26,9 +27,7 @@
     <link rel="stylesheet" href="{{asset('global/vendor/flag-icon-css/flag-icon.css')}}">
     <link rel="stylesheet" href="{{asset('global/vendor/waves/waves.css')}}">
         @yield('head')
-    
-    
-    <!-- Fonts -->
+      <!-- Fonts -->
     <link rel="stylesheet" href="{{asset('global/fonts/material-design/material-design.min.css')}}">
     <link rel="stylesheet" href="{{asset('global/fonts/brand-icons/brand-icons.min.css')}}">
     <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Roboto:300,400,500,300italic'>

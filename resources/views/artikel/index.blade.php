@@ -7,13 +7,14 @@
 
 <div class="page">
   <div class="page-content">
- 
+ @if (auth()->user()->role == 'ahli_tani' || auth()->user()->role == 'admin')
     <div class="row mb-5">
       <div class="col-md-12">
       <a href="{{route('artikel.create')}}"><button type="button" class="btn btn-primary waves-effect waves-classic float-right"><i class="icon md-plus" aria-hidden="true"></i>Add Artikel</button>
      </a>  
     </div>
     </div>
+    @endif
     <!-- Panel -->
     <div class="panel">
       <div class="panel-body container-fluid">
