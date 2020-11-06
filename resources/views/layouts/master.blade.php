@@ -80,7 +80,7 @@
               <a class="nav-link navbar-avatar" data-toggle="dropdown" href="#" aria-expanded="false"
                 data-animation="scale-up" role="button">
                 <span class="avatar avatar-online">
-                  <img src="{{asset('global/portraits/5.jpg')}}" alt="...">
+                  <img src="{{asset(Storage::url(is_null(auth()->user()->image) ? 'user/profile/placeholder.png' : 'user/profile/'.auth()->user()->image))}}" alt="...">
                   <i></i>
                 </span>
               </a>
