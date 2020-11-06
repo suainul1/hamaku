@@ -1,6 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
+@error('warning')
+        <h1>{{$message}}</h1>
+    @enderror
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
