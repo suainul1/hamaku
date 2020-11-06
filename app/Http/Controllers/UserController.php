@@ -161,13 +161,16 @@ class UserController extends Controller
         }else{
             $user->update([
                 'name' => $request->nama,
-                'profesi' => $request->profesi,
                 'email' => $request->email,
                 'password' => !is_null($request->password) ? bcrypt($request->password) : $user->password,
                 'role'  =>  $user->role,
                 'alamat' => $request->alamat,
                 'image' => $fileName,
                 'jenis_kelamin' => $request->jenis_kelamin
+            ]);
+            $user->ahliTani()->update([
+                'profesi' => $request->profesi,
+                
             ]);
         }
         return redirect()->back();
