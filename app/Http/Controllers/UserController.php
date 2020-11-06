@@ -127,6 +127,12 @@ class UserController extends Controller
             'alamat' => ['required', 'min:4'],
             'jenis_kelamin' => ['required'],
         ]);
+        if ($user->role == 'ahli_tani') {
+        
+        $request->validate([
+            'profesi' => ['string', 'max:255', 'min:2'],
+        ]);
+        }
         if (!is_null($request->password)) {
             if (Hash::check($request->old_password, $user->password)) {
                 $user->update([
@@ -142,12 +148,23 @@ class UserController extends Controller
             $fileName = substr(md5(microtime()), 0, 100) . '.' . $file->getClientOriginalExtension();
             $request->file('image')->storeAs('public/user/profile', $fileName);
         }
-        if (auth()->user()->role != 'ahli_tani') {
+        if ($user->role != 'ahli_tani') {
             $user->update([
                 'name' => $request->nama,
                 'email' => $request->email,
                 'password' => !is_null($request->password) ? bcrypt($request->password) : $user->password,
-                'role'  =>  'petani',
+                'role'  =>  $user->role,
+                'alamat' => $request->alamat,
+                'image' => $fileName,
+                'jenis_kelamin' => $request->jenis_kelamin
+            ]);
+        }else{
+            $user->update([
+                'name' => $request->nama,
+                'profesi' => $request->profesi,
+                'email' => $request->email,
+                'password' => !is_null($request->password) ? bcrypt($request->password) : $user->password,
+                'role'  =>  $user->role,
                 'alamat' => $request->alamat,
                 'image' => $fileName,
                 'jenis_kelamin' => $request->jenis_kelamin

@@ -57,6 +57,16 @@
             <span class="text-danger">{{$message}}</span>
             @enderror
                   </div>
+                  @if ($user->role == 'ahli_tani')
+                <span class="text-info">Nb:Profesi diisi khusus Ahli tani</span>
+                <div class="form-group form-material @error('profesi') has-danger @enderror" data-plugin="formMaterial">
+                  <label class="form-control-label" for="inputText">Profesi</label>
+                  <input type="text" class="form-control" id="inputText" value="{{$user->ahliTani->profesi}}" name="profesi" placeholder="Profesi">
+                  @error('profesi')
+                  <span class="text-danger">{{$message}}</span>
+                  @enderror
+                </div>
+                @endif
                   <span class="text-danger">Jika Tidak ingin mengganti password harap tidak diisi</span>
                   <div class="form-group form-material @error('old_password') has-danger @enderror" data-plugin="formMaterial">
                     <label class="form-control-label" for="inputPassword">Password lama</label>
