@@ -32,7 +32,7 @@ class UserController extends Controller
         ]);
         if ($validator->fails()) {
             return redirect('user/all')
-                ->withErrors($validator)->with('update', true)
+                ->withErrors($validator)->with('update', true)->with('button','myButtonEdit'.$user->id)
                 ->withInput();
         }
         if ($request->role == 'ahli_tani') {

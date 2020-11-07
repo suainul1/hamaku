@@ -77,7 +77,7 @@
           </div>
         </div>
         <!-- End Modal -->
-      <li class="list-group-item {{$i%2 == 0 ? 'active' : null}}">{{$k->nama}} <form id="kategori" action="{{route('kategori.delete',$k->id)}}" method="POST"> @csrf @method('delete') <a onclick="confirm('apakah anda yakin ingin Mengahpus?')" id="delete"><span style="cursor: pointer" class="badge badge-round badge-danger float-right">Hapus</span></a></form><span data-target="#exampleNiftyFall{{$i}}" data-toggle="modal" id="myButtonEdit" class="badge badge-round badge-warning float-right">Edit</span></li>
+      <li class="list-group-item {{$i%2 == 0 ? 'active' : null}}">{{$k->nama}} <form id="kategori" action="{{route('kategori.delete',$k->id)}}" method="POST"> @csrf @method('delete') <a onclick="confirm('apakah anda yakin ingin Mengahpus?')" id="delete"><span style="cursor: pointer" class="badge badge-round badge-danger float-right">Hapus</span></a></form><span data-target="#exampleNiftyFall{{$i}}" data-toggle="modal" id="myButtonEdit{{$k->id}}" class="badge badge-round badge-warning float-right">Edit</span></li>
                 @endforeach
                 </ul>
             </div>
@@ -98,7 +98,7 @@
 
       if(update == "1"){
       window.onload = function(){
-      var button = document.getElementById('myButtonEdit');
+      var button = document.getElementById('{{session()->get("button")}}');
     button.click();
       }
       }
