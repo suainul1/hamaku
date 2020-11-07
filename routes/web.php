@@ -23,7 +23,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::view('/', 'home.index')->name('home');
 });
 
-Route::group(['middleware' => ['auth', 'CheckRole:admin,ahli_tani,petani', 'CheckStatus:aktif']], function () {
+Route::group(['middleware' => ['auth','verified','CheckRole:admin,ahli_tani,petani', 'CheckStatus:aktif']], function () {
     Route::prefix('artikel')->name('artikel.')->group(function () {
         Route::get('/', [ArtikelController::class, 'index'])->name('index');
         Route::get('/show/{artikel}', [ArtikelController::class, 'show'])->name('show');

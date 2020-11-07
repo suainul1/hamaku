@@ -44,7 +44,7 @@ class KategoriController extends Controller
 
         if ($validator->fails()) {
             return redirect('kategori')
-            ->withErrors($validator)->with('update', true)
+            ->withErrors($validator)->with('update', true)->with('button','myButtonEdit'.$kategori->id)
             ->withInput(); 
 		}
         $kategori->update([

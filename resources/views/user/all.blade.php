@@ -169,7 +169,7 @@
                       </div>
                       <div style="width: 200px" class="pl-0 pl-sm-20 mt-15 mt-sm-0 align-self-center">
                       
-                        <button id="myButtonEdit" type="button" @if ((auth()->user()->id == $u->id) || $u->role != 'admin') data-target="#exampleNifty{{$u->id}}" data-toggle="modal" @endif class="btn btn-warning btn-sm waves-effect waves-classic">
+                      <button id="myButtonEdit{{$u->id}}" type="button" @if ((auth()->user()->id == $u->id) || $u->role != 'admin') data-target="#exampleNifty{{$u->id}}" data-toggle="modal" @endif class="btn btn-warning btn-sm waves-effect waves-classic">
                           <i class="icon md-plus" aria-hidden="true"></i>Edit
                         </button>
                         @if ((auth()->user()->id == $u->id) || $u->role != 'admin')
@@ -316,7 +316,7 @@ button.click();
 
   if(update == "1"){
   window.onload = function(){
-  var button = document.getElementById('myButtonEdit');
+  var button = document.getElementById('{{session()->get("button")}}');
 button.click();
   }
   }
