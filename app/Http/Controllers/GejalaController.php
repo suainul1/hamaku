@@ -14,7 +14,7 @@ class GejalaController extends Controller
     {
 
         $validator = Validator::make($request->all(), [
-            'kategori_gejala_id' => ['required'],
+            'kategori_gejala' => ['required'],
             'hama' => ['required'],
             'nama_gejala' => ['required','string','min:5']
             ]);
