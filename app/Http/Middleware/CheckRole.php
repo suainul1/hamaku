@@ -19,6 +19,7 @@ class CheckRole
         if(in_array($request->user()->role,$roles)){
             return $next($request);
         }
-            return redirect()->back()->withErrors(['warning' => 'harap Login menggunakan akun '.$roles[0]]);
+        toast('harap Login menggunakan akun '.$roles[0], 'success');
+            return redirect()->back();
     }
 }

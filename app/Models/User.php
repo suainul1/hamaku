@@ -49,4 +49,12 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasOne(AhliTani::class);
     }
+    public function toUser()
+    {
+        return $this->hasMany('App\Models\Message','to_user_id');
+    }
+    public function fromUser()
+    {
+        return $this->hasMany('App\Models\Message','from_user_id');
+    }
 }

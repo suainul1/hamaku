@@ -22,7 +22,7 @@ class UserTable extends Seeder
             'jenis_kelamin' => 'pria',
             'alamat' => 'pasuruan',
         ]);
-        User::create([
+        $u = User::create([
             'name' => 'Ahli Tani',
             'email' => 't@t.com',
             'password' => bcrypt('t'),
@@ -37,6 +37,9 @@ class UserTable extends Seeder
             'jenis_kelamin' => 'wanita',
             'role' => 'petani',
             'alamat' => 'bondowoso',
+        ]);
+        $u->ahliTani()->create([
+            'profesi' => 'penyakit akar padi',
         ]);
     }
 }
