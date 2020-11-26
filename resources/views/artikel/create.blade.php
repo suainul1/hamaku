@@ -46,8 +46,8 @@
                     <h4 class="example-title">Kategori</h4>
                   @foreach ($kategoris as $k)
                     <div class="checkbox-custom checkbox-primary">
-                      <input type="checkbox" name="kategori[]" id="inputUnchecked" value="{{$k->id}}">
-                      <label for="inputUnchecked">{{$k->nama}}</label>
+                    <input type="checkbox" name="kategori[]" id="input{{$k->id}}" value="{{$k->id}}">
+                    <label for="input{{$k->id}}">{{$k->nama}}</label>
                     </div>
                     @endforeach
                     @error('kategori')

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAhliTanisTable extends Migration
+class CreateGejalasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class CreateAhliTanisTable extends Migration
      */
     public function up()
     {
-        Schema::create('ahli_tanis', function (Blueprint $table) {
+        Schema::create('gejalas', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->string('profesi');
-            $table->enum('status',['tutup','buka','konsultasi'])->default('tutup');
+            $table->foreignId('kategori_gejala_id')->references('id')->on('kategori_gejalas')->onDelete('cascade');
+            $table->foreignId('hama_id')->references('id')->on('hamas')->onDelete('cascade');
+            $table->text('nama_gejala');
             $table->timestamps();
         });
     }
@@ -29,6 +29,6 @@ class CreateAhliTanisTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ahli_tanis');
+        Schema::dropIfExists('gejalas');
     }
 }

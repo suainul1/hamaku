@@ -12,9 +12,27 @@
                 <span class="site-menu-title">Managemen User</span>
               </a>
             </li>
+
+            <li class="site-menu-item active">
+              <a class="animsition-link" href="{{route('pakar.setting')}}">
+                <i class="site-menu-icon md-view-dashboard" aria-hidden="true"></i>
+                <span class="site-menu-title">Managemen Pakar</span>
+              </a>
+            </li>
             @endif
             @if (auth()->user()->role == 'petani')
-                
+            <li class="site-menu-item active">
+              <a class="animsition-link" href="{{route('room.index')}}">
+                        <i class="site-menu-icon md-view-dashboard" aria-hidden="true"></i>
+                        <span class="site-menu-title">Konsultasi</span>
+                    </a>
+              </li> 
+              <li class="site-menu-item active">
+                <a class="animsition-link" href="{{route('pakar.index')}}">
+                          <i class="site-menu-icon md-view-dashboard" aria-hidden="true"></i>
+                          <span class="site-menu-title">Diagnosa Penyakit Padi</span>
+                      </a>
+                </li>    
             <li class="site-menu-item active">
               <a class="animsition-link" href="{{route('artikel.index')}}">
                         <i class="site-menu-icon md-view-dashboard" aria-hidden="true"></i>

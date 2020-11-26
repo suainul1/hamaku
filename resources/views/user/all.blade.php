@@ -137,7 +137,7 @@
 
                       <div class="pr-0 pr-sm-20 align-self-center">
                         <div class="avatar avatar-online">
-                          <img src="{{asset(Storage::url(is_null($u->image) ? 'user/profile/placeholder.png' : 'user/profile/'.$u->image))}}"" alt="...">
+                          <img src="{{asset(Storage::url(is_null($u->image) ? 'user/profile/placeholder.png' : 'user/profile/'.$u->image))}}" alt="...">
                           <i class="avatar avatar-busy"></i>
                         </div>
                       </div>
