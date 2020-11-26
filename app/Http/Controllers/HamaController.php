@@ -20,7 +20,7 @@ class HamaController extends Controller
             ]);
         if ($validator->fails()) {
             Alert::warning('Warning', 'Failed Create!!');
-            return redirect()->back()
+            return redirect()->back()->withErrors($validator)
                 ->withInput();
         }
         Hama::create([
@@ -39,7 +39,7 @@ class HamaController extends Controller
             ]);
         if ($validator->fails()) {
             Alert::warning('Warning', 'Failed Update!!');
-            return redirect()->back()
+            return redirect()->back()->withErrors($validator)
                 ->withInput();
         }
         $hama->update([
