@@ -16,10 +16,10 @@ class CreateArtikelsTable extends Migration
         Schema::create('artikels', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->string('judul');
-            $table->string('thumbnail');
-            $table->string('slug')->unique();
-            $table->string('desc',100);
+            $table->string('judul',50);
+            $table->string('thumbnail',30);
+            $table->string('slug',50)->unique();
+            $table->string('desc',30);
             $table->text('isi');
             $table->timestamps();
         });

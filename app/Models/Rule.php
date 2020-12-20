@@ -5,13 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Hama extends Model
+class Rule extends Model
 {
     use HasFactory;
     protected $guarded = [];
-    public function rule()
+    public function hama()
     {
-        return $this->hasMany(Rule::class);
+        return $this->belongsTo(Hama::class);
     }
-
 }

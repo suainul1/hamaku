@@ -73,6 +73,13 @@
                         <span class="text-danger">{{$message}}</span>
                         @enderror    
                     </div>
+                    <div class="form-group form-material @error('kode') has-danger @enderror" data-plugin="formMaterial">
+                        <label class="form-control-label" for="hama">Kode Hama</label>
+                        <input type="text" class="form-control" id="hama" name="kode" placeholder="Kode Hama">
+                        @error('kode')
+                        <span class="text-danger">{{$message}}</span>
+                        @enderror    
+                    </div>
                     <div class="form-group form-material @error('solusi') has-danger @enderror" data-plugin="formMaterial">
                         <label class="form-control-label" for="solusi">Solusi</label>
                         <textarea id="summernote" data-plugin="summernote" class="form-control" id="solusi"
@@ -134,6 +141,13 @@
                     @error('nama_hama')
                     <span class="text-danger">{{$message}}</span>
                     @enderror        
+                </div>
+                <div class="form-group form-material @error('kode') has-danger @enderror" data-plugin="formMaterial">
+                    <label class="form-control-label" for="hama">Kode Hama</label>
+                <input type="text" class="form-control" id="hama" name="kode" placeholder="Kode Hama" value="{{$h->kode}}">
+                    @error('kode')
+                    <span class="text-danger">{{$message}}</span>
+                    @enderror    
                 </div>
                     <div class="form-group form-material @error('solusi') has-danger @enderror" data-plugin="formMaterial">
                         <label class="form-control-label" for="solusi">Solusi</label>

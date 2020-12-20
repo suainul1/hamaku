@@ -24,7 +24,8 @@ class User extends Authenticatable implements MustVerifyEmail
         'alamat',
         'status',
         'image',
-        'jenis_kelamin'
+        'jenis_kelamin',
+        'point'
     ];
 
     /**
@@ -49,12 +50,16 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasOne(AhliTani::class);
     }
-    public function toUser()
-    {
-        return $this->hasMany('App\Models\Message','to_user_id');
-    }
     public function fromUser()
     {
-        return $this->hasMany('App\Models\Message','from_user_id');
+        return $this->hasMany(Message::class);
+    }
+    public function room()
+    {
+        return $this->hasMany(Room::class);
+    }
+    public function transaksi()
+    {
+        return $this->hasMany(Transaksi::class);
     }
 }

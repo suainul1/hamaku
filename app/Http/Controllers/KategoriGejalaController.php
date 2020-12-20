@@ -15,14 +15,15 @@ class KategoriGejalaController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'nama_kategori' => ['required','string','min:3','unique:kategori_gejalas'],
-        ]);
+            'kode' => ['unique:kategori_gejalas'],
+            ]);
         if ($validator->fails()) {
             Alert::warning('Warning', 'Failed Create!!');
             return redirect()->back()->withErrors($validator)
                 ->withInput();
         }
         KategoriGejala::create([
-            'kode' => Str::random(4),
+            'kode' => $request->kode,
             'nama_kategori' => Str::title($request->nama_kategori),
         ]);
         toast('Success Create!', 'success');
@@ -32,7 +33,8 @@ class KategoriGejalaController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'nama_kategori' => ['required','string','min:3',Rule::unique('kategori_gejalas')->ignore($kategori->id)],
-        ]);
+            'kode' => [Rule::unique('kategori_gejalas')->ignore($kategori->id)],
+            ]);
         if ($validator->fails()) {
             Alert::warning('Warning', 'Failed Update!!');
             return redirect()->back()->withErrors($validator)
@@ -40,6 +42,7 @@ class KategoriGejalaController extends Controller
         }
         $kategori->update([
             'nama_kategori' => Str::title($request->nama_kategori),
+            'kode' => $request->kode,
         ]);
         toast('Success Update!', 'success');
         return redirect()->back();

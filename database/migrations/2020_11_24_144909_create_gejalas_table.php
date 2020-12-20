@@ -16,8 +16,8 @@ class CreateGejalasTable extends Migration
         Schema::create('gejalas', function (Blueprint $table) {
             $table->id();
             $table->foreignId('kategori_gejala_id')->references('id')->on('kategori_gejalas')->onDelete('cascade');
-            $table->foreignId('hama_id')->references('id')->on('hamas')->onDelete('cascade');
-            $table->text('nama_gejala');
+           $table->string('kode',3);
+            $table->string('nama_gejala',150);
             $table->timestamps();
         });
     }

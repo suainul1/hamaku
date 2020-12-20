@@ -24,12 +24,21 @@
             <div class="app-message-list page-aside-scroll">
                 <div data-role="container">
                     <div data-role="content">
+                        
                         <ul class="list-group">
-                            @forelse ($ahli ?? [] as $u)
+                            @forelse ($room as $u)
+                            @php
+                            $id = $u->id;
+                              if(auth()->user()->role == 'petani'){
+                                  $u = $u->ahliTani->user;
+                              }else{
+                                $u = $u->user;
+                              }
+                          @endphp
                             <li class="list-group-item active">
                                 <div class="media">
                                     <div class="pr-20">
-                                        <a class="avatar avatar-online" data-target="#chatingan{{$u->id}}" data-toggle="modal" href="javascript:void(0)">
+                                        <a class="avatar avatar-online" href="{{route('room.view',$id)}}">
                                             <img class="img-fluid"
                                                 src="{{asset(Storage::url(is_null($u->image) ? 'user/profile/placeholder.png' : 'user/profile/'.$u->image))}}"
                                                 alt="..."><i></i></a>
@@ -44,27 +53,9 @@
                                 </div>
                             </li>
                             @empty
-                            
+                            <p>tidak ada chat</p>
                             @endforelse
-                            @if ($a)
-                            <li class="list-group-item active">
-                                <div class="media">
-                                    <div class="pr-20">
-                                        <a class="avatar avatar-online" data-target="#chatingan{{$a->id}}" data-toggle="modal" href="javascript:void(0)">
-                                            <img class="img-fluid"
-                                                src="{{asset(Storage::url(is_null($a->image) ? 'user/profile/placeholder.png' : 'user/profile/'.$a->image))}}"
-                                                alt="..."><i></i></a>
-                                    </div>
-                                    <div class="media-body">
-                                        <h5 class="mt-0 mb-5">{{$a->name}}</h5>
-                                        <span class="media-time">{{$a->updated_at->diffForHumans()}}</span>
-                                    </div>
-                                    {{-- <div class="pl-20">
-                      <span class="badge badge-pill badge-danger">3</span>
-                    </div> --}}
-                                </div>
-                            </li>
-                            @endif
+                           
                         </ul>
                     </div>
                 </div>
@@ -77,7 +68,7 @@
 
         <div class="app-message-chats">
             <div class="chats">
-                @forelse ($room->message ?? [] as $c)
+                @forelse ($chat->message ?? [] as $c)
                 @if (auth()->user()->id == $c->from_user_id)   
                     <div class="chat">
                         <div class="chat-avatar">
@@ -96,10 +87,13 @@
                     </div>
                 <p class="time">{{$c->created_at->diffForHumans()}}</p>
                 @else
+                @php
+                    $to = \App\Models\User::find($c->to_user_id);
+                @endphp
                 <div class="chat chat-left">
                     <div class="chat-avatar">
                         <a class="avatar" data-toggle="tooltip" href="#" data-placement="left" title="">
-                            <img src="{{asset(Storage::url(is_null($a->image) ? 'user/profile/placeholder.png' : 'user/profile/'.$a->image))}}" alt="Edward Fletcher">
+                            <img src="{{asset(Storage::url(is_null($to->image) ? 'user/profile/placeholder.png' : 'user/profile/'.$to->image))}}" alt="Edward Fletcher">
                         </a>
                     </div>
                     <div class="chat-body">
@@ -119,17 +113,20 @@
         <!-- End Chat Box -->
 
         <!-- Message Input-->
-        @if ($room)
-            
-        <form action="{{route('room.chat',$a->id)}}" method="POST" class="app-message-input">
+        @if ($chat->status != 'selesai')
+         
+        <form action="{{route('message.chat',$chat->id)}}" method="POST" class="app-message-input">
             @csrf
+        <input type="number" name="touser" value="{{auth()->user()->role == 'petani' ? $chat->ahliTani->user->id : $chat->user->id}}" hidden>
             <div class="input-group form-material">
                 <span class="input-group-btn">
-                    <a href="javascript: void(0)" class="btn btn-pure btn-default icon md-camera"></a>
+                    @if (auth()->user()->role == 'ahli_tani')
+                    <a href="javascript: void(0)" id="closechat" class="btn btn-pure btn-default icon md-close"></a>
+                    @endif
                 </span>
                 <input class="form-control" type="text" placeholder="Type message here ..." name="pesan">
                 <span class="input-group-btn">
-                    <button type="button" class="btn btn-pure btn-default icon md-mail-send"></button>
+                    <button type="submit" class="btn btn-pure btn-default icon md-mail-send"></button>
                 </span>
             </div>
         </form>
@@ -138,7 +135,10 @@
 
     </div>
 </div>
-
+<form id="formclose" action="{{route('room.close',$chat->id)}}" method="post">
+@csrf
+@method('put')
+</form>
 @foreach ($ahli ?? [] as $u)
 <div class="modal fade modal-fall" id="chatingan{{$u->id}}" aria-hidden="true" aria-labelledby="exampleModalTitle" role="dialog"
     tabindex="-1">
@@ -171,5 +171,11 @@
 <script src="{{asset('assets/js/Site.js')}}"></script>
 <script src="{{asset('assets/js/App/Message.js')}}"></script>
 {{-- <script src="{{asset('assets/examples/js/apps/message.js')}}"></script> --}}
-
+<script>
+    $(document).ready(function(){
+        $('#closechat').click(function(){
+            $('#formclose').submit();
+        });
+    });
+</script>
 @endsection

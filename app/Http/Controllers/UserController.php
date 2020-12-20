@@ -24,10 +24,10 @@ class UserController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'role' => ['required'],
-            'nama' => ['required', 'string', 'max:255', 'min:2'],
-            'email' => ['required', 'string', 'email', 'max:255', Rule::unique('users')->ignore($user->id)],
-            'password' => ['nullable', 'string', 'min:8', 'confirmed'],
-            'alamat' => ['required', 'min:4'],
+            'nama' => ['required', 'string', 'max:50', 'min:2'],
+            'email' => ['required', 'string', 'email', 'max:50', Rule::unique('users')->ignore($user->id)],
+            'password' => ['nullable', 'string', 'min:8', 'confirmed','max:16'],
+            'alamat' => ['required', 'min:4','max:100'],
             'jenis_kelamin' => ['required'],
         ]);
         if ($validator->fails()) {
@@ -65,10 +65,10 @@ class UserController extends Controller
     public function add(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'nama' => ['required', 'string', 'max:255', 'min:2'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'alamat' => ['required', 'min:4'],
+            'nama' => ['required', 'string', 'max:50', 'min:2'],
+            'email' => ['required', 'string', 'email', 'max:50', 'unique:users'],
+            'password' => ['required', 'string', 'min:8', 'confirmed','max:50'],
+            'alamat' => ['required', 'min:4','max:100'],
             'jenis_kelamin' => ['required'],
             'role' => ['required'],
         ]);
@@ -120,11 +120,11 @@ class UserController extends Controller
     public function update(Request $request, User $user)
     {
         $request->validate([
-            'nama' => ['required', 'string', 'max:255', 'min:2'],
-            'email' => ['required', 'string', 'email', 'max:255', Rule::unique('users')->ignore($user->id)],
+            'nama' => ['required', 'string', 'max:50', 'min:2'],
+            'email' => ['required', 'string', 'email', 'max:50', Rule::unique('users')->ignore($user->id)],
             'image' => ['nullable', 'image', 'max:2048'],
-            'password' => ['nullable', 'string', 'min:8', 'confirmed'],
-            'alamat' => ['required', 'min:4'],
+            'password' => ['nullable', 'string', 'min:8', 'confirmed','max:16'],
+            'alamat' => ['required', 'min:4','max:100'],
             'jenis_kelamin' => ['required'],
         ]);
         if ($user->role == 'ahli_tani') {
@@ -173,6 +173,13 @@ class UserController extends Controller
                 
             ]);
         }
+        return redirect()->back();
+    }
+    public function konsultasi($param)
+    {
+        auth()->user()->ahliTani()->update([
+            'status' => $param
+        ]);
         return redirect()->back();
     }
 }

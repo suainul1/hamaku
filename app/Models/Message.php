@@ -9,9 +9,9 @@ class Message extends Model
 {
     use HasFactory;
     protected $guarded = [];
-    public function User()
+    public function user()
     {
-        return $this->belongsTo(Message::class);
+        return $this->belongsTo(User::class);
     }
     public function room()
     {

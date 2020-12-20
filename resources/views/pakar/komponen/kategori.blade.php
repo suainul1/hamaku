@@ -72,6 +72,14 @@
                             <span class="text-danger">{{$message}}</span>
                             @enderror    
                         </div>
+                        <div class="form-group form-material @error('kode') has-danger @enderror" data-plugin="formMaterial">
+                            <label class="form-control-label" for="kategorigejala">Kode</label>
+                            <input type="text" class="form-control" id="kategorigejala" name="kode"
+                                placeholder="kode">
+                                @error('kode')
+                                <span class="text-danger">{{$message}}</span>
+                                @enderror    
+                            </div>
             </div>
             <div class="modal-footer">
                 <button type="submit" class="btn btn-primary">Save changes</button>
@@ -104,6 +112,14 @@
                     <input type="text" class="form-control" id="kategorigejala" value="{{$k->nama_kategori}}" name="nama_kategori"
                     placeholder="Nama Kategori Gejala">
                     @error('nama_kategori')
+                    <span class="text-danger">{{$message}}</span>
+                    @enderror    
+                </div>
+                <div class="form-group form-material @error('kode') has-danger @enderror" data-plugin="formMaterial">
+                    <label class="form-control-label" for="kategorigejala">Kode</label>
+                    <input type="text" class="form-control" id="kategorigejala" value="{{$k->kode}}" name="kode"
+                    placeholder="kode">
+                    @error('kode')
                     <span class="text-danger">{{$message}}</span>
                     @enderror    
                 </div>

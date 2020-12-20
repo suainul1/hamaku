@@ -5,13 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Hama extends Model
+class RiwayatDiagnosa extends Model
 {
     use HasFactory;
     protected $guarded = [];
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
     public function rule()
     {
-        return $this->hasMany(Rule::class);
+        return $this->belongsTo(Rule::class);
     }
-
 }

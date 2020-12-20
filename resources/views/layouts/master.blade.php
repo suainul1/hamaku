@@ -58,24 +58,30 @@
     
           <!-- Navbar Toolbar Right -->
           <ul class="nav navbar-toolbar navbar-right navbar-toolbar-right">
+            @if (auth()->user()->role == 'ahli_tani' && auth()->user()->ahliTani->room()->where('status','tidak')->count() == 0)
+                
             <li class="nav-item dropdown">
-              <a class="nav-link" data-toggle="dropdown" href="javascript:void(0)" data-animation="scale-up"
+              <a class="nav-link " data-toggle="dropdown" href="javascript:void(0)" data-animation="scale-up"
+              aria-expanded="false" role="button">
+              <span class="icon md-chart-donut bg-{{auth()->user()->ahliTani->status == 'buka' ? 'success' : 'danger'}}"></span>
+            </a>
+            <div class="dropdown-menu" role="menu">
+            <a class="dropdown-item" href="{{route('user.konsultasi','tutup')}}" role="menuitem">
+                <span class="icon md-close"></span>Tutup konsultasi</a>
+                <a class="dropdown-item" href="{{route('user.konsultasi','buka')}}" role="menuitem">
+                  <span class="icon md-edit"></span>Buka Konsultasi</a>
+                </div>
+              </li>
+              @endif
+              @if (auth()->user()->role != 'admin')
+              <li class="nav-item dropdown">
+                <a class="nav-link " data-toggle="dropdown" href="javascript:void(0)" data-animation="scale-up"
                 aria-expanded="false" role="button">
-                <span class="flag-icon flag-icon-us"></span>
+                Total Point: {{auth()->user()->point}}
               </a>
-              <div class="dropdown-menu" role="menu">
-                <a class="dropdown-item" href="javascript:void(0)" role="menuitem">
-                  <span class="flag-icon flag-icon-gb"></span> English</a>
-                <a class="dropdown-item" href="javascript:void(0)" role="menuitem">
-                  <span class="flag-icon flag-icon-fr"></span> French</a>
-                <a class="dropdown-item" href="javascript:void(0)" role="menuitem">
-                  <span class="flag-icon flag-icon-cn"></span> Chinese</a>
-                <a class="dropdown-item" href="javascript:void(0)" role="menuitem">
-                  <span class="flag-icon flag-icon-de"></span> German</a>
-                <a class="dropdown-item" href="javascript:void(0)" role="menuitem">
-                  <span class="flag-icon flag-icon-nl"></span> Dutch</a>
-              </div>
-            </li>
+              
+                </li>
+              @endif
             <li class="nav-item dropdown">
               <a class="nav-link navbar-avatar" data-toggle="dropdown" href="#" aria-expanded="false"
                 data-animation="scale-up" role="button">
