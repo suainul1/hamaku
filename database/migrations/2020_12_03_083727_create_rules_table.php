@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateHamasTable extends Migration
+class CreateRulesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,10 @@ class CreateHamasTable extends Migration
      */
     public function up()
     {
-        Schema::create('hamas', function (Blueprint $table) {
+        Schema::create('rules', function (Blueprint $table) {
             $table->id();
-            $table->string('kode',3);
-            $table->string('nama_hama',50);
-            $table->text('solusi');
+            $table->foreignId('hama_id')->references('id')->on('hamas')->onDelete('cascade'); 
+            $table->string('rule',50);
             $table->timestamps();
         });
     }
@@ -29,6 +28,6 @@ class CreateHamasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('hamas');
+        Schema::dropIfExists('rules');
     }
 }

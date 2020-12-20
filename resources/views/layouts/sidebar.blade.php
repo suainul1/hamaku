@@ -22,17 +22,35 @@
             @endif
             @if (auth()->user()->role == 'petani')
             <li class="site-menu-item active">
+              <a class="animsition-link" href="{{route('point.index')}}">
+                        <i class="site-menu-icon md-view-dashboard" aria-hidden="true"></i>
+                        <span class="site-menu-title">Transaksi</span>
+                    </a>
+              </li>
+            <li class="site-menu-item active">
               <a class="animsition-link" href="{{route('room.index')}}">
                         <i class="site-menu-icon md-view-dashboard" aria-hidden="true"></i>
-                        <span class="site-menu-title">Konsultasi</span>
+                        <span class="site-menu-title">Cari Ahli Tani</span>
                     </a>
               </li> 
+              <li class="site-menu-item active">
+                <a class="animsition-link" href="{{route('room.riwayat')}}">
+                          <i class="site-menu-icon md-view-dashboard" aria-hidden="true"></i>
+                          <span class="site-menu-title">Riwayat Konsultasi</span>
+                      </a>
+                </li> 
               <li class="site-menu-item active">
                 <a class="animsition-link" href="{{route('pakar.index')}}">
                           <i class="site-menu-icon md-view-dashboard" aria-hidden="true"></i>
                           <span class="site-menu-title">Diagnosa Penyakit Padi</span>
                       </a>
                 </li>    
+                <li class="site-menu-item active">
+                  <a class="animsition-link" href="{{route('pakar.riwayat')}}">
+                            <i class="site-menu-icon md-view-dashboard" aria-hidden="true"></i>
+                            <span class="site-menu-title">Riwayat Diagnosa</span>
+                        </a>
+                  </li> 
             <li class="site-menu-item active">
               <a class="animsition-link" href="{{route('artikel.index')}}">
                         <i class="site-menu-icon md-view-dashboard" aria-hidden="true"></i>
@@ -62,6 +80,14 @@
                   
                 </ul>
               </li>
+              @endif
+              @if (auth()->user()->role == 'ahli_tani')
+              <li class="site-menu-item active">
+                <a class="animsition-link" href="{{route('room.riwayat')}}">
+                          <i class="site-menu-icon md-view-dashboard" aria-hidden="true"></i>
+                          <span class="site-menu-title">Konsultasi</span>
+                      </a>
+                </li> 
               @endif
             
           </ul>

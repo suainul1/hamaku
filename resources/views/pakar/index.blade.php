@@ -10,8 +10,6 @@
     <div class="panel-body container-fluid">
         @if ($step == null)
         @include('pakar.step.satu')
-        @elseif($step == 'gejala')
-        @include('pakar.step.dua')
         @elseif($step == 'hasil')
         @include('pakar.step.hasil')
         @endif

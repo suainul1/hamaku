@@ -13,4 +13,12 @@ class AhliTani extends Model
     {
         return $this->belongsTo(User::class); 
     }
+    public function message()
+    {
+        return $this->hasMany(Message::class);
+    }
+    public function room()
+    {
+        return $this->hasMany(Room::class);
+    }
 }

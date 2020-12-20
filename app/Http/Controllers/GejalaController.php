@@ -6,6 +6,7 @@ use App\Models\Gejala;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class GejalaController extends Controller
@@ -15,8 +16,8 @@ class GejalaController extends Controller
 
         $validator = Validator::make($request->all(), [
             'kategori_gejala' => ['required'],
-            'hama' => ['required'],
-            'nama_gejala' => ['required','string','min:5']
+            'nama_gejala' => ['required','string','min:5'],
+            'kode' => ['unique:gejalas'],
             ]);
         if ($validator->fails()) {
             Alert::warning('Warning', 'Failed Create!!');
@@ -25,7 +26,7 @@ class GejalaController extends Controller
         }
         Gejala::create([
             'kategori_gejala_id' => $request->kategori_gejala,
-            'hama_id' => $request->hama,
+            'kode' => $request->kode,
             'nama_gejala' => $request->nama_gejala
         ]);
         toast('Success Create!', 'success');
@@ -34,8 +35,8 @@ class GejalaController extends Controller
     public function edit(Request $request,Gejala $gejala)
     {
         $validator = Validator::make($request->all(), [
-            'kategori_gejala_id' => ['required'],
-            'hama' => ['required'],
+            'kategori_gejala' => ['required'],
+            'kode' => [Rule::unique('gejalas')->ignore($gejala->id)],
             'nama_gejala' => ['required','string','min:5']
             ]);
         if ($validator->fails()) {
@@ -45,7 +46,7 @@ class GejalaController extends Controller
         }
         $gejala->update([
             'kategori_gejala_id' => $request->kategori_gejala,
-            'hama_id' => $request->hama,
+            'kode' => $request->kode,
             'nama_gejala' => $request->nama_gejala
         ]);
         toast('Success Edit!', 'success');

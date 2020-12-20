@@ -23,8 +23,8 @@
                             <tr>
                                 <th scope="col">No</th>
                                 <th scope="col">Nama Gejala</th>
+                                <th scope="col">Kode</th>
                                 <th scope="col">Kode Kategori Gejala</th>
-                                <th scope="col">Kode Hama Dan Solusi</th>
                                 <th scope="col">Action</th>
                             </tr>
                         </thead>
@@ -33,8 +33,8 @@
                             <tr>
                                 <td scope="row">{{$i+1}}</td>
                                 <td>{{$g->nama_gejala}}</td>
+                                <td>{{$g->kode}}</td>
                                 <td>{{$g->kategoriGejala->kode}}</td>
-                            <td>{{$g->hama->kode}}</td>
                                 <td>
                                     <div>
                                         <button  data-target="#gejalaEdit{{$g->id}}" data-toggle="modal" type="button" class="btn btn-round btn-warning btn-pill-left waves-effect waves-classic">Edit</button>
@@ -86,16 +86,13 @@
                         <span class="text-danger">{{$message}}</span>
                         @enderror  
                     </div>
-                      <div class="form-group form-material floating @error('hama') has-danger @enderror" data-plugin="formMaterial">
-                        <select name="hama" class="form-control">
-                        @foreach ($hama as $h)
-                        <option value="{{$h->id}}">{{$h->kode}}-{{$h->nama_hama}}</option>
-                        @endforeach
-                        </select>
-                        <label class="floating-label">Jenis Hama</label>
-                        @error('hama')
+                    <div class="form-group form-material @error('kode') has-danger @enderror" data-plugin="formMaterial">
+                        <label class="form-control-label" for="kategorigejala">Kode</label>
+                        <input type="text" class="form-control" id="kategorigejala" value="{{$k->kode}}" name="kode"
+                        placeholder="kode">
+                        @error('kode')
                         <span class="text-danger">{{$message}}</span>
-                        @enderror  
+                        @enderror    
                     </div>
             </div>
             <div class="modal-footer">
@@ -136,14 +133,14 @@ tabindex="-1">
                     </select>
                     <label class="floating-label">Katgeori Gejala</label>
                   </div>
-                  <div class="form-group form-material floating" data-plugin="formMaterial">
-                    <select name="hama" class="form-control">
-                    @foreach ($hama as $h)
-                    <option value="{{$h->id}}" {{$g->hama_id == $h->id ? 'selected' : null}}>{{$h->kode}}-{{$h->nama_hama}}</option>
-                    @endforeach 
-                    </select>
-                    <label class="floating-label">Jenis Hama</label>
-                  </div>
+                  <div class="form-group form-material @error('kode') has-danger @enderror" data-plugin="formMaterial">
+                    <label class="form-control-label" for="kategorigejala">Kode</label>
+                    <input type="text" class="form-control" id="kategorigejala" value="{{$g->kode}}" name="kode"
+                    placeholder="kode">
+                    @error('kode')
+                    <span class="text-danger">{{$message}}</span>
+                    @enderror    
+                </div>
         </div>
         <div class="modal-footer">
             <button type="submit" class="btn btn-primary">Save changes</button>

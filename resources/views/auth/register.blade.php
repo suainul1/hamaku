@@ -59,6 +59,10 @@
             </div>
             @enderror
           </div>
+          <div class="form-group form-material floating" data-plugin="formMaterial">
+            <input type="password" class="form-control empty" id="inputPasswordCheck" name="password_confirmation" required autocomplete="new-password">
+            <label class="floating-label" for="inputPasswordCheck">Ulangi Password</label>
+          </div>
           <div class="form-group form-material floating @error('jenis_kelamin') has-danger @enderror" data-plugin="formMaterial">
             <select name="jenis_kelamin" class="form-control">
               <option value="pria">Laki-Laki</option>
@@ -71,10 +75,7 @@
             </div>
             @enderror
           </div>
-          <div class="form-group form-material floating" data-plugin="formMaterial">
-            <input type="password" class="form-control empty" id="inputPasswordCheck" name="password_confirmation" required autocomplete="new-password">
-            <label class="floating-label" for="inputPasswordCheck">Ulangi Password</label>
-          </div>
+          
           <button type="submit" class="btn btn-primary btn-block">Register</button>
         </form>
         <footer class="page-copyright page-copyright-inverse">

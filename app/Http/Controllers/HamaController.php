@@ -15,7 +15,8 @@ class HamaController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'nama_hama' => ['required','string','min:3','unique:hamas'],
-            'solusi' => ['required','string','min:5']
+            'solusi' => ['required','string','min:5'],
+            'kode' => ['unique:hamas'],
             
             ]);
         if ($validator->fails()) {
@@ -24,7 +25,7 @@ class HamaController extends Controller
                 ->withInput();
         }
         Hama::create([
-            'kode' => Str::random(4),
+            'kode' => $request->kode,
             'nama_hama' => $request->nama_hama,
             'solusi' => $request->solusi,
         ]);
@@ -35,7 +36,8 @@ class HamaController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'nama_hama' => ['required','string','min:3',Rule::unique('hamas')->ignore($hama->id)],
-            'solusi' => ['required','string','min:5']
+            'solusi' => ['required','string','min:5'],
+            [Rule::unique('hamas')->ignore($hama->id)]
             ]);
         if ($validator->fails()) {
             Alert::warning('Warning', 'Failed Update!!');
@@ -43,6 +45,7 @@ class HamaController extends Controller
                 ->withInput();
         }
         $hama->update([
+            'kode' => $request->kode,
             'nama_hama' => $request->nama_hama,
             'solusi' => $request->solusi,
         ]);
